@@ -1,0 +1,62 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="es.fpdual.eadmin.eadmin.mapper.BloqueMapper">
+
+	<update id="modificarRegistroDeLaTablaBloques">
+		UPDATE BLOQUES
+		SET ID_MODULO = #{bloque.idModulo},
+		ORDEN = #{bloque.orden},
+		DESCRIPCION = #{bloque.descripcion}
+		ID_FORMADOR_RESPONSABLE = #{bloque.idFormadorResponsable}
+		WHERE ID_BLOQUE = #{bloque.idModulo} AND
+		EMPRESA = #{bloque.empresa}
+	</update>
+	
+	<select id="consultarTodosLosRegistrosDeLaTablaBloques" resultMap="crearRegistro">
+		SELECT * FROM BLOQUES 
+	</select>
+	
+	<select id="consultarRegistrosDeLaTablaModulosPorIdBloques" resultMap="crearRegistro">
+<<<<<<< HEAD
+		SELECT * FROM BLOQUES WHERE ID_BLOQUES=#{idBloque}
+
+=======
+		SELECT * FROM BLOQUES WHERE ID_BLOQUES=#{codigo}
+>>>>>>> refs/heads/master
+	</select>
+	
+	<select id="consultarRegistrosDeLaTablaModulosPorEmpresa" resultMap="crearRegistro">
+<<<<<<< HEAD
+		SELECT * FROM BLOQUES WHERE EMPRESA=#{empresa}
+
+=======
+		SELECT * FROM BLOQUES WHERE EMPRESA=#{codigo}
+>>>>>>> refs/heads/master
+	</select>
+	
+	<select id="consultarRegistrosDeLaTablaModulosPorEmpresaYIdBloque" resultMap="crearRegistro">
+		SELECT * FROM BLOQUES WHERE EMPRESA=#{empresa} AND ID_RESULTADO=#{resultado}
+
+	</select>
+	
+	<select id="obtenerEmpresas" resultMap="crearRegistro">
+		SELECT EMPRESA FROM BLOQUES GROUP BY EMPRESA
+
+	</select>
+	
+	<select id="obtenerBloques" resultMap="crearRegistro">
+		SELECT ID_BLOQUE FROM BLOQUES GROUP BY ID_BLOQUE
+
+	</select>
+	
+
+	<resultMap id="crearRegistro" type="fpbasicsdb.modelo.TablaBloques">
+		<constructor>
+			<idArg column="EMPRESA" javaType="String" />
+			<arg column="ID_BLOQUES" javaType="Integer" />
+			<arg column="ID_MODULO" javaType="Integer" />
+			<arg column="ORDEN" javaType="Integer" />
+			<arg column="DESCRIPCION" javaType="String" />
+			<arg column="ID_FORMADOR_RESPONSABLE" javaType="Integer" />
+		</constructor>
+	</resultMap>
+</mapper>

@@ -1,0 +1,35 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="es.fpdual.eadmin.eadmin.mapper.FormadoresMapper">
+
+	<update id="modificarRegistroDeLaTablaFormadores">
+		UPDATE FORMADORES
+		SET NOMBRE = #{formador.nombre},
+		APELLIDOS = #{formador.apellidos},
+		TELEFONO = #{formador.telefono}
+		EMAIL = #{formador.email}
+		WHERE ID_FORMADOR = #{formador.idformador} 
+	</update>
+
+
+	<select id="consultarTodosLosRegistrosDeLaTablaFormadores" resultMap="crearRegistro">
+		SELECT * FROM FORMADORES 
+
+	</select>
+	
+	<select id="consultarRegistrosDeLaTablaFormadoresPorIdFormador" resultMap="crearRegistro">
+		SELECT * FROM FORMADORES WHERE ID_FORMADOR=#{codigo}
+
+	</select>
+
+
+	<resultMap id="crearRegistro" type="fpbasicsdb.modelo.TablaFormadores">
+		<constructor>
+			<idArg column="ID_FORMADOR" javaType="Integer" />
+			<arg column="NOMBRE" javaType="String" />
+			<arg column="APELLIDOS" javaType="String" />
+			<arg column="TELEFONO" javaType="Integer" />
+			<arg column="EMAIL" javaType="String" />
+		</constructor>
+	</resultMap>
+
+</mapper>

@@ -1,5 +1,9 @@
 package FPBasicsDB.FPBasicsDB.modelo;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class TablaFormadores {
 
 	private final String idFormador;
@@ -39,14 +43,38 @@ public class TablaFormadores {
 
 	@Override
 	public int hashCode() {
-		return idFormador.hashCode();
+		final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
+		
+			hashCodeBuilder.append(idFormador);
+			hashCodeBuilder.append(nombre);
+			hashCodeBuilder.append(apellidos);
+			hashCodeBuilder.append(telefono);
+			hashCodeBuilder.append(email);
+		
+		return hashCodeBuilder.toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof TablaFormadores) {
-			return idFormador.equals(((TablaFormadores) obj).getIdformado());
+			
+			final TablaFormadores param = (TablaFormadores)obj;
+			final EqualsBuilder equalsBuilder = new EqualsBuilder();
+			
+			equalsBuilder.append(this.idFormador, param.idFormador);
+			equalsBuilder.append(this.nombre, param.nombre);
+			equalsBuilder.append(this.apellidos, param.apellidos);
+			equalsBuilder.append(this.telefono, param.telefono);
+			equalsBuilder.append(this.email, param.email);
+			
+			return equalsBuilder.isEquals();
+			
 		}
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

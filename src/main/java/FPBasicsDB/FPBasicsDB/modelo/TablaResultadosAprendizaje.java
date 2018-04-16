@@ -1,5 +1,9 @@
 package FPBasicsDB.FPBasicsDB.modelo;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class TablaResultadosAprendizaje {
 	private final Integer idResultado;
 	private final Integer idModulo;
@@ -26,15 +30,34 @@ public class TablaResultadosAprendizaje {
 
 	@Override
 	public int hashCode() {
-		return idResultado.hashCode() + idModulo.hashCode();
+		final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
+		
+			hashCodeBuilder.append(idResultado);
+			hashCodeBuilder.append(idModulo);
+			hashCodeBuilder.append(descripcion);
+		
+		return hashCodeBuilder.toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof TablaResultadosAprendizaje) {
-			return idResultado.equals(((TablaResultadosAprendizaje) obj).getIdResultados())
-					&& idModulo.equals(((TablaResultadosAprendizaje) obj).getIdModulo());
+			
+			final TablaResultadosAprendizaje param = (TablaResultadosAprendizaje)obj;
+			final EqualsBuilder equalsBuilder = new EqualsBuilder();
+			
+			equalsBuilder.append(this.idResultado, param.idResultado);
+			equalsBuilder.append(this.idModulo, param.idModulo);
+			equalsBuilder.append(this.descripcion, param.descripcion);
+			
+			return equalsBuilder.isEquals();
+			
 		}
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 }

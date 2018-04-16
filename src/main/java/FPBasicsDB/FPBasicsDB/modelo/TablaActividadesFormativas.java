@@ -1,5 +1,9 @@
 package FPBasicsDB.FPBasicsDB.modelo;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 public class TablaActividadesFormativas {
 
 	private final Integer idActividad;
@@ -40,17 +44,38 @@ public class TablaActividadesFormativas {
 
 	@Override
 	public int hashCode() {
-		return idActividad.hashCode() + empresa.hashCode() + idBloque.hashCode();
+		final HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
+		
+			hashCodeBuilder.append(idActividad);
+			hashCodeBuilder.append(empresa);
+			hashCodeBuilder.append(idBloque);
+			hashCodeBuilder.append(descripcionActividad);
+			hashCodeBuilder.append(horasDedicadas);
+		
+		return hashCodeBuilder.toHashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (obj instanceof TablaActividadesFormativas) {
-			return idActividad.equals(((TablaActividadesFormativas) obj).getIdactividad())
-					&& empresa.equals(((TablaActividadesFormativas) obj).getEmpresa())
-					&& idBloque.equals(((TablaActividadesFormativas) obj).getIdbloque());
+			
+			final TablaActividadesFormativas param = (TablaActividadesFormativas)obj;
+			final EqualsBuilder equalsBuilder = new EqualsBuilder();
+			
+			equalsBuilder.append(this.idActividad, param.idActividad);
+			equalsBuilder.append(this.empresa, param.empresa);
+			equalsBuilder.append(this.idBloque, param.idBloque);
+			equalsBuilder.append(this.descripcionActividad, param.descripcionActividad);
+			equalsBuilder.append(this.horasDedicadas, param.horasDedicadas);
+			
+			return equalsBuilder.isEquals();
 		}
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
 	}
 
 }

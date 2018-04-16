@@ -21,13 +21,13 @@ public class RepositorioResultadosAprendizajeImpl implements RepositorioResultad
 
 	@Override
 	public List<TablaResultadosAprendizaje> consultarRegistrosDeLaTablaResultadosAprendizajePorIdResultado(Integer idResultado) {
-		return this.mapper.consultarRegistrosDeLaTablaResultadoAprendizajePorIdResultados(idResultado);
+		return this.mapper.consultarRegistrosDeLaTablaResultadosAprendizajePorIdResultado(idResultado);
 	}
 	
 	@Override
 	public List<TablaResultadosAprendizaje> consultarRegistrosDeLaTablaResultadosAprendizajePorIdModulo(
 			Integer idModulo) {
-		return this.mapper.consultarRegistrosDeLaTablaResultadoAprendizajePorIdModulo(idModulo);
+		return this.mapper.consultarRegistrosDeLaTablaResultadosAprendizajePorIdModulo(idModulo);
 	}
 	
 	@Override

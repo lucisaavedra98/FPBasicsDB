@@ -1,5 +1,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="es.fpdual.eadmin.eadmin.mapper.FormadoresMapper">
+<mapper namespace="es.fpdual.eadmin.eadmin.mapper.FormadorMapper">
 
 	<update id="modificarRegistroDeLaTablaFormadores">
 		UPDATE FORMADORES
@@ -21,7 +21,7 @@
 	
 	<!-- Para acceso por la tabla bloques y para modificacion -->
 	<select id="consultarRegistrosDeLaTablaFormadoresPorIdFormador" resultMap="crearRegistro">
-		<include refid="baseSelectDocumento"/> AND ID_FORMADOR=#{codigo}
+		<include refid="baseSelectDocumento"/> AND ID_FORMADOR=#{idFormador}
 
 	</select>
 

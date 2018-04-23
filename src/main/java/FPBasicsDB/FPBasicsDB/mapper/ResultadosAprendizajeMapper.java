@@ -7,20 +7,14 @@ import org.apache.ibatis.annotations.Param;
 import FPBasicsDB.FPBasicsDB.modelo.TablaResultadosAprendizaje;
 
 public interface ResultadosAprendizajeMapper {
+	
+	int modificarRegistroDeLaTablaResultadosAprendizaje(@Param("resultadoAprendizaje") TablaResultadosAprendizaje registro);
+
 
 	List<TablaResultadosAprendizaje> consultarTodosLosRegistrosDeLaTablaResultadoAprendizaje();
 	
-	List<TablaResultadosAprendizaje> consultarRegistrosDeLaTablaResultadosAprendizajePorIdModulo(@Param("idModulo") Integer idModulo);
+	List<TablaResultadosAprendizaje> consultarRegistrosDeLaTablaResultadoAprendizajePorIdModulo(@Param("idModulo") Integer idModulo);
 	
-	List<TablaResultadosAprendizaje> consultarRegistrosDeLaTablaResultadosAprendizajePorIdResultado(@Param("idResultado") Integer idResultado);
-	
-	TablaResultadosAprendizaje consultarRegistrosDeLaTablaResultadosAprendizajePorIdResultadoEIdModulo(@Param("idResultado") Integer idResultado, @Param("idResultado") Integer idModulo);
-	
-	List<Integer> obtenerModulos();
-	
-	List<Integer> obtenerIdResultados();
-
-	int modificarRegistroDeLaTablaResultadosAprendizaje(@Param("resultadoAprendizaje") TablaResultadosAprendizaje registro);
-
-	
+	List<TablaResultadosAprendizaje> consultarRegistrosDeLaTablaResultadoAprendizajePorIdModuloYIdResultados(@Param("idModulo") Integer idModulo, @Param("idResultado") Integer idResultado);
+		
 }

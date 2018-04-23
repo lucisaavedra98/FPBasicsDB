@@ -7,10 +7,12 @@ import org.apache.ibatis.annotations.Param;
 import FPBasicsDB.FPBasicsDB.modelo.TablaModulos;
 
 public interface ModuloMapper {
-
+	
+	public int modificarRegistroDeLaTablaModulos(@Param("modulo")TablaModulos registro);	
+	
 	public List<TablaModulos> consultarTodosLosRegistrosDeLaTablaModulos();
 
-	public TablaModulos consultarRegistrosDeLaTablaModulosPorIdModulo(@Param("codigo")Integer idModulo) ;
+	public TablaModulos consultarRegistrosDeLaTablaModulosPorIdModulo(@Param("idModulo")Integer idModulo) ;
 
-	public int modificarRegistroDeLaTablaModulos(@Param("modulo")TablaModulos registro);	
+	
 }

@@ -10,7 +10,7 @@
 	</update>
 	<!-- General -->
 	<sql id="baseSelectDocumento">
-		SELECT * FROM MODULO WHERE 1=1
+		SELECT * FROM MODULOS WHERE 1=1
 	</sql>
 
 	<select id="consultarTodosLosRegistrosDeLaTablaModulos" resultMap="crearRegistro">

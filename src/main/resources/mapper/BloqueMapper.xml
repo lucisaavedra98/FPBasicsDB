@@ -10,7 +10,7 @@
 		WHERE ID_BLOQUE = #{bloque.idModulo} AND
 		EMPRESA = #{bloque.empresa}
 	</update>
-	
+	<!-- General -->
 	<select id="baseSelectDocumento" resultMap="crearRegistro">
 		SELECT * FROM BLOQUES WHERE 1=1
 	</select>
@@ -19,30 +19,20 @@
 		<include refid="baseSelectDocumento"/>
 	</select>
 	
-	<select id="consultarRegistrosDeLaTablaModulosPorIdBloques" resultMap="crearDocumento">
-		<include refid="baseSelectDocumento"/> AND ID_BLOQUES=#{idBloque}
+	<!-- Para modificacion y acceso desde tabla Actividades Formativas -->
+	<select id="consultarRegistrosDeLaTablaBloquePorEmpresaYIdBloque" resultMap="crearDocumento">
+		<include refid="baseSelectDocumento"/> AND ID_BLOQUES=#{idBloque} AND EMPRESA=#{empresa}
 	</select>
 	
-	<select id="consultarRegistrosDeLaTablaModulosPorEmpresa" resultMap="crearRegistro">
-		<include refid="baseSelectDocumento"/> AND EMPRESA=#{empresa}
-
+	<!-- Para acceso desde tabla Formadores -->
+	<select id="consultarRegistrosDeLaTablaBloquePorIdFormadorResponsable" resultMap="crearDocumento">
+		<include refid="baseSelectDocumento"/> AND ID_FORMADOR_RESPONSABLE=#{idFormadorResponsable}
 	</select>
 	
-	<select id="consultarRegistrosDeLaTablaModulosPorEmpresaYIdBloque" resultMap="crearRegistro">
-		<include refid="baseSelectDocumento"/>AND EMPRESA=#{empresa} AND ID_RESULTADO=#{resultado}
-
+	<!-- Para acceso desde tabla Modulos -->
+	<select id="consultarRegistrosDeLaTablaBloquePorIdModulo" resultMap="crearDocumento">
+		<include refid="baseSelectDocumento"/> AND ID_MODULO=#{idModulo}
 	</select>
-	
-	<select id="obtenerEmpresas" resultMap="crearRegistro">
-		<include refid="baseSelectDocumento"/> GROUP BY EMPRESA
-
-	</select>
-	
-	<select id="obtenerBloques" resultMap="crearRegistro">
-		<include refid="baseSelectDocumento"/> GROUP BY ID_BLOQUE
-
-	</select>
-	
 
 	<resultMap id="crearRegistro" type="fpbasicsdb.modelo.TablaBloques">
 		<constructor>

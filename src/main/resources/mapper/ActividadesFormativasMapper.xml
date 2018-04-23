@@ -1,50 +1,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="es.fpdual.eadmin.eadmin.mapper.ActividadesFormativasMapper">
 
-	<update id="modificarRegistroDeLaTablaResultadoAprendizaje">
-		UPDATE RESULTADOS_APRENDIZAJE
-		SET DESCRIPCION = #{resultadoAprendizaje.descripcion}
-		WHERE ID_RESULTADOS = #{resultadoAprendizaje.idResultados} AND
-		ID_MODULO = #{resultadoAprendizaje.idModulo}
+	<update id="modificarRegistroDeLaTablaActividadesFormativas">
+		UPDATE ACTIVIDADES_FORMATIVAS
+		SET DESCRIPCION_ACTIVIDAD = #{ActividadFormativa.descripcionActividad},
+		HORAS_DEDICADAS = #{ActividadFormativa.horasDedicadas}
+		WHERE ID_ACTIVIDAD = #{ActividadFormativa.idActividad} AND
+		EMPRESA = #{ActividadFormativa.empresa} AND
+		ID_BLOQUE =#{ActividadFormativa.idBloque}
 	</update>
+	
+	<!-- General -->
 	<select id="baseSelectDocumento" resultMap="crearRegistro">
 		SELECT * FROM ACTIVIDADES_FORMATIVAS WHERE 1=1
 	</select>
-
 	<select id="consultarTodosLosRegistrosDeLaTablaActividadesFormativas" resultMap="crearRegistro">
 		<include refid="baseSelectDocumento"/>
 
 	</select>
 	
-	<select id="consultarRegistrosDeLaTablaActividadesFormativasPorIdActividad" resultMap="crearRegistro">
-		<include refid="baseSelectDocumento"/> AND WHERE ID_ACTIVIDAD=#{idActividad}
+	
+	<!-- Para modificaciones -->
+	<select id="consultarRegistrosDeLaTablaActividadesFormativasPorIdActividadEmpresaEIdBloque" resultMap="crearRegistro">
+		<include refid="baseSelectDocumento"/> AND WHERE ID_ACTIVIDAD=#{idActividad} AND EMPRESA=#{empresa} AND ID_BLOQUE=#{idBloque}
 
 	</select>
 	
-	<select id="consultarRegistrosDeLaActividadesFormativasPorEmpresa" resultMap="crearRegistro">
-		<include refid="baseSelectDocumento"/> AND EMPRESA=#{empresa}
+	<!-- Para acceso desde tabla Bloques -->
+	<select id="consultarRegistrosDeLaTablaActividadesFormativasPorEmpresaEIdBloque" resultMap="crearRegistro">
+		<include refid="baseSelectDocumento"/>  AND EMPRESA=#{empresa} AND ID_BLOQUE=#{idBloque}
 
 	</select>
 	
-	<select id="consultarRegistrosDeLaTablaResultadoAprendizajePorIdResultadosEIdModulo" resultMap="crearRegistro">
-		<include refid="baseSelectDocumento"/> AND ID_RESULTADO=#{idResultado} AND ID_MODULO=#{idModulo}
+	<!-- Para acceso desde tabla Formadores -->
+	<select id="consultarRegistrosDeLaTablaActividadesFormativasPorIdActividadEmpresaEIdBloqueViaFormadores" resultMap="crearRegistro">
+		<include refid="baseSelectDocumento"/> AND ID_ACTIVIDAD=ANY(SELECT ID_ACTIVIDAD FROM ACTIVIDADES_FORMADORES WHERE ID_FORMADOR=#{idFormador}) 
+		AND EMPRESA=ANY(SELECT EMPRESA FROM ACTIVIDADES_FORMADORES WHERE ID_FORMADOR=#{idFormador}) 
+		AND ID_BLOQUE=ANY(SELECT ID_BLOQUE FROM ACTIVIDADES_FORMADORES WHERE ID_FORMADOR=#{idFormador})
 
 	</select>
 	
-	<select id="obtenerModulos" resultMap="crearRegistro">
-		SELECT ID_MODULO FROM RESULTADO_APRENDIZAJE GROUP BY ID_MODULO
-		
-	</select>
-	
-	<select id="obtenerIdResultados" resultMap="crearRegistro">
-		SELECT ID_RESULTADOS FROM RESULTADO_APRENDIZAJE GROUP BY ID_RESULTADOS
-	</select>
 
-	<resultMap id="crearRegistro" type="fpbasicsdb.modelo.TablaResultadosAprendizaje">
+
+<!--  SELECT * FROM ACTIVIDADES_FORMATIVAS 
+WHERE ID_ACTIVIDAD=ANY(SELECT ID_ACTIVIDAD FROM ACTIVIDADES_FORMADORES WHERE ID_FORMADOR=1) 
+AND EMPRESA=ANY(SELECT EMPRESA FROM ACTIVIDADES_FORMADORES WHERE ID_FORMADOR=1) 
+AND ID_BLOQUE=ANY(SELECT ID_BLOQUE FROM ACTIVIDADES_FORMADORES WHERE ID_FORMADOR=1)-->
+
+
+
+
+
+	<resultMap id="crearRegistro" type="fpbasicsdb.modelo.TablaActividadesFormativas">
 		<constructor>
-			<idArg column="ID_RESULTADOS" javaType="Integer" />
-			<arg column="ID_MODULO" javaType="Integer" />
-			<arg column="DESCRIPCION" javaType="String" />
+			<idArg column="ID_ACTIVIDAD" javaType="Integer" />
+			<arg column="EMPRESA" javaType="Integer" />
+			<arg column="ID_BLOQUE" javaType="Integer" />
+			<arg column="DESCRIPCION_ACTIVIDAD" javaType="String" />
+			<arg column="HORAS_DEDICADAS" javaType="Integer" />
+
 		</constructor>
 	</resultMap>
 

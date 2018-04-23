@@ -33,7 +33,7 @@
 	</select>
 	
 
-	<resultMap id="crearRegistro" type="fpbasicsdb.modelo.TablaResultadosAprendizaje">
+	<resultMap id="crearRegistro" type="fpbasicsdb.modelo.TablaActividadesFormativas">
 		<constructor>
 			<idArg column="ID_RESULTADOS" javaType="Integer" />
 			<arg column="ID_MODULO" javaType="Integer" />

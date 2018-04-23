@@ -21,11 +21,19 @@
 	
 	<!-- Para acceso por la tabla bloques y para modificacion -->
 	<select id="consultarRegistrosDeLaTablaFormadoresPorIdFormador" resultMap="crearRegistro">
-		S<include refid="baseSelectDocumento"/> AND ID_FORMADOR=#{codigo}
+		<include refid="baseSelectDocumento"/> AND ID_FORMADOR=#{codigo}
 
 	</select>
 
 
+	<!-- Para acceso por la tabla Actividades Formativas -->
+	<select id="consultarRegistrosDeLaTablaFormadoresPorIdFormadorViaActividadesFormativas" resultMap="crearRegistro">
+		<include refid="baseSelectDocumento"/> AND ID_FORMADOR = ANY(SELECT ID_FORMADOR FROM ACTIVIDADES_FORMADORES WHERE ID_ACTIVIDAD=#{idActividad} AND EMPRESA=#{idEmpresa} AND ID_BLOQUE=#{idBloque})
+	</select>
+	
+	<!--  SELECT * FROM FORMADORES WHERE ID_FORMADOR = ANY(SELECT ID_FORMADOR FROM ACTIVIDADES_FORMADORES WHERE ID_ACTIVIDAD=1 AND EMPRESA='aytos' AND ID_BLOQUE=1)-->
+	
+	
 	<resultMap id="crearRegistro" type="fpbasicsdb.modelo.TablaFormadores">
 		<constructor>
 			<idArg column="ID_FORMADOR" javaType="Integer" />

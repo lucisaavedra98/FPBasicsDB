@@ -20,7 +20,7 @@
 	
 	<!-- Para acceso por la tabla Resultados_Aprendizaje, tambien para Bloques y para Modificacion -->
 	<select id="consultarRegistrosDeLaTablaModulosPorIdModulo" resultMap="crearRegistro">
-		<include refid="baseSelectDocumento"/>AND ID_MODULO=#{codigo}
+		<include refid="baseSelectDocumento"/>AND ID_MODULO=#{idModulo}
 
 	</select>
 

@@ -1,0 +1,51 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD MAPPER 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="es.fpdual.eadmin.eadmin.mapper.ActividadesFormativasMapper">
+
+	<update id="modificarRegistroDeLaTablaResultadoAprendizaje">
+		UPDATE RESULTADOS_APRENDIZAJE
+		SET DESCRIPCION = #{resultadoAprendizaje.descripcion}
+		WHERE ID_RESULTADOS = #{resultadoAprendizaje.idResultados} AND
+		ID_MODULO = #{resultadoAprendizaje.idModulo}
+	</update>
+	<select id="baseSelectDocumento" resultMap="crearRegistro">
+		SELECT * FROM ACTIVIDADES_FORMATIVAS WHERE 1=1
+	</select>
+
+	<select id="consultarTodosLosRegistrosDeLaTablaActividadesFormativas" resultMap="crearRegistro">
+		<include refid="baseSelectDocumento"/>
+
+	</select>
+	
+	<select id="consultarRegistrosDeLaTablaActividadesFormativasPorIdActividad" resultMap="crearRegistro">
+		<include refid="baseSelectDocumento"/> AND WHERE ID_ACTIVIDAD=#{idActividad}
+
+	</select>
+	
+	<select id="consultarRegistrosDeLaActividadesFormativasPorEmpresa" resultMap="crearRegistro">
+		<include refid="baseSelectDocumento"/> AND EMPRESA=#{empresa}
+
+	</select>
+	
+	<select id="consultarRegistrosDeLaTablaResultadoAprendizajePorIdResultadosEIdModulo" resultMap="crearRegistro">
+		<include refid="baseSelectDocumento"/> AND ID_RESULTADO=#{idResultado} AND ID_MODULO=#{idModulo}
+
+	</select>
+	
+	<select id="obtenerModulos" resultMap="crearRegistro">
+		SELECT ID_MODULO FROM RESULTADO_APRENDIZAJE GROUP BY ID_MODULO
+		
+	</select>
+	
+	<select id="obtenerIdResultados" resultMap="crearRegistro">
+		SELECT ID_RESULTADOS FROM RESULTADO_APRENDIZAJE GROUP BY ID_RESULTADOS
+	</select>
+
+	<resultMap id="crearRegistro" type="fpbasicsdb.modelo.TablaResultadosAprendizaje">
+		<constructor>
+			<idArg column="ID_RESULTADOS" javaType="Integer" />
+			<arg column="ID_MODULO" javaType="Integer" />
+			<arg column="DESCRIPCION" javaType="String" />
+		</constructor>
+	</resultMap>
+
+</mapper>

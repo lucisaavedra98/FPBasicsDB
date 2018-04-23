@@ -7,36 +7,31 @@
 		WHERE ID_RESULTADOS = #{resultadoAprendizaje.idResultados} AND
 		ID_MODULO = #{resultadoAprendizaje.idModulo}
 	</update>
-
+	
+	<!-- General -->
+	<sql id="baseSelectDocumento">
+		SELECT * FROM RESULTADOS_APRENDIZAJE WHERE 1=1
+	</sql>
 
 	<select id="consultarTodosLosRegistrosDeLaTablaResultadoAprendizaje" resultMap="crearRegistro">
-		SELECT * FROM RESULTADOS_APRENDIZAJE 
+		<include refid="baseSelectDocumento"/>
 
 	</select>
 	
+	
+	<!-- Para acceso por la tabla Modulo -->
 	<select id="consultarRegistrosDeLaTablaResultadoAprendizajePorIdModulo" resultMap="crearRegistro">
-		SELECT * FROM RESULTADOS_APRENDIZAJE WHERE ID_MODULO=#{idModulo}
+		<include refid="baseSelectDocumento"/> AND ID_MODULO=#{idModulo}
 
 	</select>
 	
-	<select id="consultarRegistrosDeLaTablaResultadoAprendizajePorIdResultados" resultMap="crearRegistro">
-		SELECT * FROM RESULTADOS_APRENDIZAJE WHERE ID_RESULTADO=#{idResultado}
+	
+	<!-- Para modificacion -->
+	<select id="consultarRegistrosDeLaTablaResultadoAprendizajePorIdModuloYIdResultados" resultMap="crearRegistro">
+		<include refid="baseSelectDocumento"/> AND ID_MODULO=#{idModulo} AND ID_RESULTADOS=#{idResultados}
 
 	</select>
 	
-	<select id="consultarRegistrosDeLaTablaResultadoAprendizajePorIdResultadosEIdModulo" resultMap="crearRegistro">
-		SELECT * FROM RESULTADOS_APRENDIZAJE WHERE ID_RESULTADO=#{idResultado} AND ID_MODULO=#{idModulo}
-
-	</select>
-	
-	<select id="obtenerModulos" resultMap="crearRegistro">
-		SELECT ID_MODULO FROM RESULTADO_APRENDIZAJE GROUP BY ID_MODULO
-		
-	</select>
-	
-	<select id="obtenerIdResultados" resultMap="crearRegistro">
-		SELECT ID_RESULTADOS FROM RESULTADO_APRENDIZAJE GROUP BY ID_RESULTADOS
-	</select>
 
 	<resultMap id="crearRegistro" type="fpbasicsdb.modelo.TablaResultadosAprendizaje">
 		<constructor>

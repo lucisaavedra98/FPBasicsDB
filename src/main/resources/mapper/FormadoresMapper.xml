@@ -9,15 +9,19 @@
 		EMAIL = #{formador.email}
 		WHERE ID_FORMADOR = #{formador.idformador} 
 	</update>
-
+	<!-- General -->
+	<sql id="baseSelectDocumento">
+		SELECT * FROM FORMADORES WHERE 1=1
+	</sql>
 
 	<select id="consultarTodosLosRegistrosDeLaTablaFormadores" resultMap="crearRegistro">
-		SELECT * FROM FORMADORES 
-
+		<include refid="baseSelectDocumento"/>
 	</select>
 	
+	
+	<!-- Para acceso por la tabla bloques y para modificacion -->
 	<select id="consultarRegistrosDeLaTablaFormadoresPorIdFormador" resultMap="crearRegistro">
-		SELECT * FROM FORMADORES WHERE ID_FORMADOR=#{codigo}
+		S<include refid="baseSelectDocumento"/> AND ID_FORMADOR=#{codigo}
 
 	</select>
 

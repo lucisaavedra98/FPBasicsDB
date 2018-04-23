@@ -11,40 +11,35 @@
 		EMPRESA = #{bloque.empresa}
 	</update>
 	
+	<select id="baseSelectDocumento" resultMap="crearRegistro">
+		SELECT * FROM BLOQUES WHERE 1=1
+	</select>
+		
 	<select id="consultarTodosLosRegistrosDeLaTablaBloques" resultMap="crearRegistro">
-		SELECT * FROM BLOQUES 
+		<include refid="baseSelectDocumento"/>
 	</select>
 	
-	<select id="consultarRegistrosDeLaTablaModulosPorIdBloques" resultMap="crearRegistro">
-<<<<<<< HEAD
-		SELECT * FROM BLOQUES WHERE ID_BLOQUES=#{idBloque}
-
-=======
-		SELECT * FROM BLOQUES WHERE ID_BLOQUES=#{codigo}
->>>>>>> refs/heads/master
+	<select id="consultarRegistrosDeLaTablaModulosPorIdBloques" resultMap="crearDocumento">
+		<include refid="baseSelectDocumento"/> AND ID_BLOQUES=#{idBloque}
 	</select>
 	
 	<select id="consultarRegistrosDeLaTablaModulosPorEmpresa" resultMap="crearRegistro">
-<<<<<<< HEAD
-		SELECT * FROM BLOQUES WHERE EMPRESA=#{empresa}
+		<include refid="baseSelectDocumento"/> AND EMPRESA=#{empresa}
 
-=======
-		SELECT * FROM BLOQUES WHERE EMPRESA=#{codigo}
->>>>>>> refs/heads/master
 	</select>
 	
 	<select id="consultarRegistrosDeLaTablaModulosPorEmpresaYIdBloque" resultMap="crearRegistro">
-		SELECT * FROM BLOQUES WHERE EMPRESA=#{empresa} AND ID_RESULTADO=#{resultado}
+		<include refid="baseSelectDocumento"/>AND EMPRESA=#{empresa} AND ID_RESULTADO=#{resultado}
 
 	</select>
 	
 	<select id="obtenerEmpresas" resultMap="crearRegistro">
-		SELECT EMPRESA FROM BLOQUES GROUP BY EMPRESA
+		<include refid="baseSelectDocumento"/> GROUP BY EMPRESA
 
 	</select>
 	
 	<select id="obtenerBloques" resultMap="crearRegistro">
-		SELECT ID_BLOQUE FROM BLOQUES GROUP BY ID_BLOQUE
+		<include refid="baseSelectDocumento"/> GROUP BY ID_BLOQUE
 
 	</select>
 	

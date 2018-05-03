@@ -16,21 +16,11 @@
 	</select>
 	
 	<select id="consultarRegistrosDeLaTablaModulosPorIdBloques" resultMap="crearRegistro">
-<<<<<<< HEAD
 		SELECT * FROM BLOQUES WHERE ID_BLOQUES=#{idBloque}
-
-=======
-		SELECT * FROM BLOQUES WHERE ID_BLOQUES=#{codigo}
->>>>>>> refs/heads/master
 	</select>
 	
 	<select id="consultarRegistrosDeLaTablaModulosPorEmpresa" resultMap="crearRegistro">
-<<<<<<< HEAD
 		SELECT * FROM BLOQUES WHERE EMPRESA=#{empresa}
-
-=======
-		SELECT * FROM BLOQUES WHERE EMPRESA=#{codigo}
->>>>>>> refs/heads/master
 	</select>
 	
 	<select id="consultarRegistrosDeLaTablaModulosPorEmpresaYIdBloque" resultMap="crearRegistro">
